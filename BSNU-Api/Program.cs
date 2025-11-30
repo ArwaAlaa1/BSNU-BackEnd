@@ -1,7 +1,9 @@
 
+using BSNU.Core;
 using BSNU.Core.Models;
 using BSNU.Repository;
 using BSNU.Repository.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -20,6 +22,7 @@ namespace BSNU_Api
 
             builder.Services.AddControllers();
 
+           builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddDbContext<BSNUDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
            ServiceLifetime.Scoped);
