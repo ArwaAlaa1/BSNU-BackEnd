@@ -17,15 +17,22 @@ namespace BSNU.Repository.Data
     { }
 
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
             base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             modelBuilder.Entity<Program>()
         .HasOne(p => p.User)
         .WithOne(u => u.Program)
         .HasForeignKey<Program>(p => p.UserId);
+
+            modelBuilder.Entity<News>()
+         .HasOne(n => n.Category)
+         .WithMany(c => c.News)
+         .HasForeignKey(n => n.CategoryId)
+         .OnDelete(DeleteBehavior.Restrict);
+
         }
 
         public DbSet<AppUser> Users { get; set; }

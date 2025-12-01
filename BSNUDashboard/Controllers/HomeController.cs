@@ -1,4 +1,5 @@
 using BSNUDashboard.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,9 +14,21 @@ namespace BSNUDashboard.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [Authorize(AuthenticationSchemes = "Cookies")]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var x = User.Identity.IsAuthenticated;
+            //bool flag = false;
+            //if (User.IsInRole("Admin"))
+            //{
+            //    var list = await _product.GetWaitingProducts();
+            //    if (list.Any())
+            //    {
+            //        flag = true;
+            //    }
+            //    return View(flag);
+            //}
+            return RedirectToAction(nameof(Index),"News");
         }
 
         public IActionResult Privacy()

@@ -1,7 +1,44 @@
-﻿
+﻿@using BSNU.Core.Models
+@model IEnumerable<News>
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2 class="mb-4">Items</h2>
 
+<p>
+    <a asp-action="Create" class="btn btn-primary mb-3">Create New</a>
+</p>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+
+                @if (!string.IsNullOrEmpty(item.ImageUrl))
+                {
+                    <img src="~/Images/News/@item.ImageUrl" class="card-img-top" alt="Image" style="height:200px; object-fit:cover;">
+                }
+                else
+                {
+                    <div class="p-5 text-center bg-light">
+                        <span>No Image</span>
+                    </div>
+                }
+
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@item.Description</p>
+                </div>
+
+                <div class="card-footer bg-white">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\BSNU.Repository\BSNU.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\News\" />
+  </ItemGroup>
+
 </Project>
