@@ -1,50 +1,55 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BSNUDashboard</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BSNUDashboard.styles.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/images/images/favicon.ico">
+
+    <title>EduAdmin - Dashboard</title>
+
+    <!-- Vendors Style-->
+    <link rel="stylesheet" href="~/css/css/vendors_css.css">
+
+    <!-- Style-->
+    <link rel="stylesheet" href="~/css/css/style.css">
+    <link rel="stylesheet" href="~/css/css/skin_color.css">
+
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BSNUDashboard</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+<body class="hold-transition light-skin sidebar-mini theme-primary fixed">
+    <div class="wrapper">
+        <div id="loader"></div>
+
+
+	<partial name="_navbar.cshtml"></partial>
+      <partial name="_aside.cshtml"></partial>
+
+        <div class="container content-wrapper">
+            <main role="main" class="container-full" >
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - BSNUDashboard - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <partial name="_footer.cshtml"></partial>
         </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Vendor JS -->
+    <script src="~/js/js/vendors.min.js"></script>
+    <script src="~/js/js/pages/chat-popup.js"></script>
+    <script src="~/assets/icons/feather-icons/feather.min.js"></script>
+
+    <script src="~/assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
+    <script src="~/assets/vendor_components/moment/min/moment.min.js"></script>
+    <script src="~/assets/vendor_components/fullcalendar/fullcalendar.js"></script>
+
+    <!-- EduAdmin App -->
+    <script src="~/js/js/template.js"></script>
+    <script src="~/js/js/pages/dashboard.js"></script>
+    <script src="~/js/js/pages/calendar.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

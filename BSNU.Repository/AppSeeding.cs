@@ -1,4 +1,5 @@
 ﻿using BSNU.Core.Models;
+using BSNU.Repository.Data;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,11 @@ namespace BSNU.Repository
 {
     public static class AppSeeding
     {
-        public static async Task SeedUsersAsync(UserManager<AppUser> _usermanager, RoleManager<IdentityRole> _roleManager)
+        public static async Task SeedUsersAsync(UserManager<AppUser> _usermanager, RoleManager<IdentityRole> _roleManager, BSNUDbContext dbContext)
         {
             if (_usermanager.Users.Count() == 0)
             {
-                
+
 
                 var roles = new List<IdentityRole>
 {
@@ -51,8 +52,9 @@ namespace BSNU.Repository
 
 
             }
-        }
 
-        
+
+
+        }
     }
 }

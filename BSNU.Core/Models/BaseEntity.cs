@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BSNU.Core.Models
 {
-    public class BaseEntity
+    public class BaseEntity :Primarykey
     {
-        public int Id { get; set; }
+     
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
-        public DateTime ModifiedDate { get; set; } = DateTime.Now;
+        public DateTime ModifiedDate { get; set; } 
 
         public bool IsDeleted { get; set; } = false;
         public bool IsActive { get; set; } = true;

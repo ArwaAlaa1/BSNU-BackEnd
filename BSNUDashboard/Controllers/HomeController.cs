@@ -28,7 +28,7 @@ namespace BSNUDashboard.Controllers
             //    }
             //    return View(flag);
             //}
-            return RedirectToAction(nameof(Index),"News");
+            return View();
         }
 
         public IActionResult Privacy()

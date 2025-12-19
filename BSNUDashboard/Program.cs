@@ -1,7 +1,9 @@
 using BSNU.Core;
 using BSNU.Core.Models;
+using BSNU.Core.Repository.Contract;
 using BSNU.Repository;
 using BSNU.Repository.Data;
+using BSNU.Repository.Repositories;
 using BSNUDashboard.Helper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +28,9 @@ namespace BSNUDashboard
 
               .AddEntityFrameworkStores<BSNUDbContext>()
               .AddDefaultTokenProviders();
-           
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddAutoMapper(typeof(MappingProfilesDash).Assembly);
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAuthentication("Cookies")
        .AddCookie(options =>

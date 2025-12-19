@@ -1,13 +1,16 @@
-﻿using BSNU.Core.Models;
+﻿using AutoMapper;
 using BSNU.Core;
+using BSNU.Core.Models;
+using BSNU.Repository;
+using BSNUDashboard.Helper;
+using BSNUDashboard.ViewsModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using BSNU.Repository;
-using BSNUDashboard.ViewsModels;
-using BSNUDashboard.Helper;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace BSNUDashboard.Controllers
 {
@@ -16,11 +19,13 @@ namespace BSNUDashboard.Controllers
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public NewsController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
+        public NewsController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+           _mapper = mapper;
         }
         
         public async Task<ActionResult> Index()
@@ -36,51 +41,68 @@ namespace BSNUDashboard.Controllers
             return View();
         }
 
-        
-        public ActionResult Create()
+
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var categories = await _unitOfWork.Repository<Category>().GetAllAsync();
+            var programs = await _unitOfWork.Repository<ProgramEntite>().GetAllAsync();
+
+            var model = new NewsVM
+            {
+                Categories = categories.Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name
+                }),
+                Programs = programs.Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.Name
+                })
+            };
+
+            return View(model);
         }
+
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(NewsVM newsVM)
+        public async Task<IActionResult> Create(NewsVM model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                
-                var userName = User.Identity.Name; // from [Authorize]
-                var user = await _userManager.Users
-                                             .Include(u => u.Program) // include Program
-                                             .FirstOrDefaultAsync(u => u.UserName == userName);
-
-                if (ModelState.IsValid)
-                {
-                    var imageName = "";
-                    if (newsVM.Image != null)
+                // إعادة تحميل الـ dropdowns في حالة الخطأ
+                model.Categories = (await _unitOfWork.Repository<Category>().GetAllAsync())
+                    .Select(c => new SelectListItem
                     {
-                        imageName = HandlerPhotos.UploadPhoto(newsVM.Image, "News");
-                    }
-                    var AddedNew = new News
-                    {
-                        Title = newsVM.Title,
-                        Description = newsVM.Description,
-                        ImageUrl = imageName,
-                        ProgramId = user.Program.Id
+                        Value = c.Id.ToString(),
+                        Text = c.Name
+                    });
 
-                    };
-               
-                    await _unitOfWork.Repository<News>().AddAsync(AddedNew) ;
-                    await _unitOfWork.SaveAsync();
-                }
-                return RedirectToAction(nameof(Index));
+                model.Programs = (await _unitOfWork.Repository<ProgramEntite>().GetAllAsync())
+                    .Select(p => new SelectListItem
+                    {
+                        Value = p.Id.ToString(),
+                        Text = p.Name
+                    });
+
+                return View(model);
             }
-            catch
+
+            if (model.ImageFile != null)
             {
-                return View(newsVM);
+                model.Image = HandlerPhotos.UploadPhoto(model.ImageFile, "News");
             }
+
+            var news = _mapper.Map<News>(model);
+
+            await  _unitOfWork.Repository<News>().AddAsync(news);
+            await _unitOfWork.CompleteAsync();
+
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: NewsController/Edit/5
         public ActionResult Edit(int id)

@@ -10,10 +10,9 @@ namespace BSNU.Core
     public interface IUnitOfWork : IDisposable
     {
 
-      
 
-        IGenericRepository<T> Repository<T>() where T : BaseEntity;
-        Task<int> SaveAsync();
+        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity;
 
+        Task<int> CompleteAsync();
     }
 }

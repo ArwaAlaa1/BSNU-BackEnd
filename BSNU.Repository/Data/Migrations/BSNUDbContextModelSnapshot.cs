@@ -87,6 +87,42 @@ namespace BSNU.Repository.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("BSNU.Core.Models.Banner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderBanner")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banners");
+                });
+
             modelBuilder.Entity("BSNU.Core.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -117,7 +153,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.News", b =>
@@ -167,7 +203,7 @@ namespace BSNU.Repository.Data.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.Program", b =>
+            modelBuilder.Entity("BSNU.Core.Models.ProgramEntite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,10 +211,22 @@ namespace BSNU.Repository.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AcadamicDegree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("CreditHour")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Duration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Goals")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -188,6 +236,10 @@ namespace BSNU.Repository.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Mission")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -195,9 +247,21 @@ namespace BSNU.Repository.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NumberOfStudents")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Vision")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("jopTitel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -205,6 +269,27 @@ namespace BSNU.Repository.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Programs");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Programtabel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CreditsHours")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.ToTable("Programtabels");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -348,7 +433,7 @@ namespace BSNU.Repository.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BSNU.Core.Models.Program", "Program")
+                    b.HasOne("BSNU.Core.Models.ProgramEntite", "Program")
                         .WithMany()
                         .HasForeignKey("ProgramId");
 
@@ -357,15 +442,26 @@ namespace BSNU.Repository.Data.Migrations
                     b.Navigation("Program");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.Program", b =>
+            modelBuilder.Entity("BSNU.Core.Models.ProgramEntite", b =>
                 {
                     b.HasOne("BSNU.Core.Models.AppUser", "User")
                         .WithOne("Program")
-                        .HasForeignKey("BSNU.Core.Models.Program", "UserId")
+                        .HasForeignKey("BSNU.Core.Models.ProgramEntite", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Programtabel", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.ProgramEntite", "Program")
+                        .WithMany("Programtabels")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Program");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -428,6 +524,11 @@ namespace BSNU.Repository.Data.Migrations
             modelBuilder.Entity("BSNU.Core.Models.Category", b =>
                 {
                     b.Navigation("News");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.ProgramEntite", b =>
+                {
+                    b.Navigation("Programtabels");
                 });
 #pragma warning restore 612, 618
         }

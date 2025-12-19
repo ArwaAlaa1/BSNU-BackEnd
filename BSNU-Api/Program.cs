@@ -1,12 +1,18 @@
-
+using BSNU.Core;
+using BSNU.Core.Helper;
 using BSNU.Core.Models;
+using BSNU.Core.Repository.Contract;
 using BSNU.Repository;
 using BSNU.Repository.Data;
+using BSNU.Repository.Repositories;
+using BSNU_Api.Helper;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using static System.Net.WebRequestMethods;
+
 
 namespace BSNU_Api
 {
@@ -19,18 +25,20 @@ namespace BSNU_Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-
+            builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+      
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddDbContext<BSNUDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
            ServiceLifetime.Scoped);
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-            })
-
-              .AddEntityFrameworkStores<BSNUDbContext>()
+            }).AddEntityFrameworkStores<BSNUDbContext>()
               .AddDefaultTokenProviders();
 
+        
             builder.Services.AddEndpointsApiExplorer(); // Required for Swagger
 
             builder.Services.AddSwaggerGen(c =>
@@ -84,7 +92,7 @@ namespace BSNU_Api
 
                 var usermanager = services.GetRequiredService<UserManager<AppUser>>();
                 var rolemanager = services.GetRequiredService<RoleManager<IdentityRole>>();
-                await AppSeeding.SeedUsersAsync(usermanager, rolemanager);
+                await AppSeeding.SeedUsersAsync(usermanager, rolemanager,dbcontext);
                 //await AppSeeding.SeedShippingCost(dbcontext);
 
             }

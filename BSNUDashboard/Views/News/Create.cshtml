@@ -1,29 +1,95 @@
-﻿@using BSNUDashboard.ViewsModels
-@model NewsVM
-@{
-    ViewData["Title"] = "Create";
-}
-<form asp-action="Create" method="post" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label class="form-label">Title</label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+﻿@model NewsVM
 
-    <div class="mb-3">
-        <label class="form-label">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+	<div class="d-flex align-items-center">
+		<div class="me-auto">
+			<h3 class="page-title">Form Validation</h3>
+			<div class="d-inline-block align-items-center">
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+						<li class="breadcrumb-item" aria-current="page">Forms</li>
+						<li class="breadcrumb-item active" aria-current="page">Form Validation</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
 
-    <div class="mb-3">
-        <label class="form-label">Image File</label>
-        <input asp-for="Image" type="file" class="form-control" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-    </div>
+	</div>
+</div>
 
-    
+<!-- Main content -->
+<section class="content">
 
-    <button type="submit" class="btn btn-primary">Create</button>
-</form>
+	<!-- Basic Forms -->
+	<div class="box w-70">
+		<div class="box-header with-border">
+			<h4 class="box-title">Form Validation</h4>
+			<h6 class="box-subtitle">Bootstrap Form Validation check the <a class="text-warning" href="http://reactiveraven.github.io/jqBootstrapValidation/">official website </a></h6>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<div class="row">
+				<div class="col-9">
+					<form asp-action="Create"
+						  method="post"
+						  enctype="multipart/form-data"
+						  novalidate>
 
+						@Html.AntiForgeryToken()
+
+						<!-- Title -->
+						<div class="form-group">
+							<h5>Title <span class="text-danger">*</span></h5>
+							<input asp-for="Title" class="form-control" />
+							<span asp-validation-for="Title" class="text-danger"></span>
+						</div>
+
+						<!-- Description -->
+						<div class="form-group">
+							<h5>Description <span class="text-danger">*</span></h5>
+							<textarea asp-for="Description" class="form-control" rows="4"></textarea>
+							<span asp-validation-for="Description" class="text-danger"></span>
+						</div>
+
+						<!-- Category -->
+						<div class="form-group">
+							<h5>Category <span class="text-danger">*</span></h5>
+							<select asp-for="CategoryId"
+									asp-items="Model.Categories"
+									class="form-control">
+								<option value="">-- Select Category --</option>
+							</select>
+							<span asp-validation-for="CategoryId" class="text-danger"></span>
+						</div>
+
+						<!-- Program -->
+						<div class="form-group">
+							<h5>Program</h5>
+							<select asp-for="ProgramId"
+									asp-items="Model.Programs"
+									class="form-control">
+								<option value="">-- Select Program --</option>
+							</select>
+						</div>
+
+						<!-- Image -->
+						<div class="form-group">
+							<h5>Image</h5>
+							<input asp-for="ImageFile" type="file" class="form-control" />
+						</div>
+
+						<button type="submit" class="btn btn-info">Submit</button>
+				</form>
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.box-body -->
+	</div>
+	<!-- /.box -->
+
+</section>
+<!-- /.content -->

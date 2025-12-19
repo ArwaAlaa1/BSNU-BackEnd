@@ -14,31 +14,32 @@ namespace BSNU.Repository
     {
         private readonly BSNUDbContext _db;
   
-        private Hashtable _repositories;
+        private Hashtable _Repos;
 
         public UnitOfWork(BSNUDbContext db)
 
         {
             _db = db;
-          
-            _repositories = new Hashtable();
+
+            _Repos = new Hashtable();
         }
 
-        public IGenericRepository<T> Repository<T>() where T : BaseEntity
+        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
         {
-            var key = typeof(T).Name;
-            if (!_repositories.ContainsKey(key))
-            {
-                var repository = new GenericRepository<T>(_db);
-                _repositories.Add(key, repository);
-            }
-            return _repositories[key] as IGenericRepository<T>;
-        }
+            var key = typeof(TEntity).Name;
 
-        public async Task<int> SaveAsync()
+            if (!_Repos.ContainsKey(key))
+            {
+                var repo = new GenericRepository<TEntity>(_db);
+                _Repos.Add(key,repo);
+            }
+
+            
+            return _Repos[key] as IGenericRepository<TEntity>;
+        }
+        public async Task<int> CompleteAsync()
         {
             return await _db.SaveChangesAsync();
-
         }
         public void Dispose()
         {
