@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi;
 
 
 namespace BSNU_Api
@@ -60,20 +60,20 @@ namespace BSNU_Api
                     Description = "Enter 'Bearer' [space] and your token."
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+                //c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                //        {
+                //            {
+                //                new OpenApiSecurityScheme
+                //                {
+                //                    Referencere = new OpenApiReference
+                //                    {
+                //                        Type = ReferenceType.SecurityScheme,
+                //                        Id = "Bearer"
+                //                    }
+                //                },
+                //                Array.Empty<string>()
+                //            }
+                //        });
             });
 
 
