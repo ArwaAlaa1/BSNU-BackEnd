@@ -21,7 +21,7 @@ namespace BSNUDashboard
             builder.Services.AddDbContext<BSNUDbContext>(options =>
           options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
           ServiceLifetime.Scoped);
-            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            builder.Services.AddIdentity<StaffMember, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
             })

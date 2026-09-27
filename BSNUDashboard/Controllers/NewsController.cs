@@ -18,10 +18,10 @@ namespace BSNUDashboard.Controllers
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<StaffMember> _userManager;
         private readonly IMapper _mapper;
 
-        public NewsController(IUnitOfWork unitOfWork, UserManager<AppUser> userManager,IMapper mapper)
+        public NewsController(IUnitOfWork unitOfWork, UserManager<StaffMember> userManager,IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;

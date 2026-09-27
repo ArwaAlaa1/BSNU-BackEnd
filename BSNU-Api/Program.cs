@@ -32,7 +32,7 @@ namespace BSNU_Api
             builder.Services.AddDbContext<BSNUDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),
            ServiceLifetime.Scoped);
-            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            builder.Services.AddIdentity<StaffMember, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<BSNUDbContext>()
@@ -90,7 +90,7 @@ namespace BSNU_Api
 
                 await dbcontext.Database.MigrateAsync();
 
-                var usermanager = services.GetRequiredService<UserManager<AppUser>>();
+                var usermanager = services.GetRequiredService<UserManager<StaffMember>>();
                 var rolemanager = services.GetRequiredService<RoleManager<IdentityRole>>();
                 await AppSeeding.SeedUsersAsync(usermanager, rolemanager,dbcontext);
                 //await AppSeeding.SeedShippingCost(dbcontext);

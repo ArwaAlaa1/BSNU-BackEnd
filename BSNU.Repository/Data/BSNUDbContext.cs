@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BSNU.Repository.Data
 {
-   public class BSNUDbContext :IdentityDbContext<AppUser>
+   public class BSNUDbContext :IdentityDbContext<StaffMember>
     {
         public BSNUDbContext(DbContextOptions<BSNUDbContext> options)
             : base(options)
@@ -31,7 +31,7 @@ namespace BSNU.Repository.Data
 
         }
 
-        public DbSet<AppUser> Users { get; set; }
+        public DbSet<StaffMember> Users { get; set; }
         public DbSet<News> News { get; set; }
 
         public DbSet<Sector> Sectors => Set<Sector>();

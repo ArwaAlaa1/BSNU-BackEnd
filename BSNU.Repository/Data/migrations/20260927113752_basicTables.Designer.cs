@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BSNU.Repository.Data.Migrations
+namespace BSNU.Repository.Data.migrations
 {
     [DbContext(typeof(BSNUDbContext))]
-    [Migration("20260927070526_basicTables")]
+    [Migration("20260927113752_basicTables")]
     partial class basicTables
     {
         /// <inheritdoc />
@@ -20,81 +20,10 @@ namespace BSNU.Repository.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.11")
+                .HasAnnotation("ProductVersion", "10.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("BSNU.Core.Models.AppUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
 
             modelBuilder.Entity("BSNU.Core.Models.Banner", b =>
                 {
@@ -176,6 +105,9 @@ namespace BSNU.Repository.Data.Migrations
                     b.Property<int?>("DeanId")
                         .HasColumnType("int");
 
+                    b.Property<string>("DeanId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("DescriptionAr")
                         .HasColumnType("nvarchar(max)");
 
@@ -194,7 +126,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeanId");
+                    b.HasIndex("DeanId1");
 
                     b.HasIndex("SectorId");
 
@@ -407,6 +339,9 @@ namespace BSNU.Repository.Data.Migrations
                     b.Property<int?>("ProgramManagerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ProgramManagerId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("StudentsCount")
                         .HasColumnType("int");
 
@@ -420,7 +355,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("ProgramManagerId");
+                    b.HasIndex("ProgramManagerId1");
 
                     b.ToTable("Programs");
                 });
@@ -453,16 +388,20 @@ namespace BSNU.Repository.Data.Migrations
 
             modelBuilder.Entity("BSNU.Core.Models.StaffMember", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("BioAr")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BioEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DescriptionAr")
@@ -471,8 +410,18 @@ namespace BSNU.Repository.Data.Migrations
                     b.Property<string>("DescriptionEn")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("FacultyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
@@ -481,18 +430,52 @@ namespace BSNU.Repository.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.ToTable("StaffMembers");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -632,7 +615,7 @@ namespace BSNU.Repository.Data.Migrations
                 {
                     b.HasOne("BSNU.Core.Models.StaffMember", "Dean")
                         .WithMany()
-                        .HasForeignKey("DeanId");
+                        .HasForeignKey("DeanId1");
 
                     b.HasOne("BSNU.Core.Models.Sector", "Sector")
                         .WithMany("Faculties")
@@ -716,7 +699,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasOne("BSNU.Core.Models.StaffMember", "ProgramManager")
                         .WithMany("ManagedPrograms")
-                        .HasForeignKey("ProgramManagerId");
+                        .HasForeignKey("ProgramManagerId1");
 
                     b.Navigation("Faculty");
 
@@ -728,14 +711,6 @@ namespace BSNU.Repository.Data.Migrations
                     b.HasOne("BSNU.Core.Models.Faculty", null)
                         .WithMany("StaffMembers")
                         .HasForeignKey("FacultyId");
-
-                    b.HasOne("BSNU.Core.Models.AppUser", "User")
-                        .WithOne("StaffMember")
-                        .HasForeignKey("BSNU.Core.Models.StaffMember", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -749,7 +724,7 @@ namespace BSNU.Repository.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BSNU.Core.Models.AppUser", null)
+                    b.HasOne("BSNU.Core.Models.StaffMember", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -758,7 +733,7 @@ namespace BSNU.Repository.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BSNU.Core.Models.AppUser", null)
+                    b.HasOne("BSNU.Core.Models.StaffMember", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -773,7 +748,7 @@ namespace BSNU.Repository.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BSNU.Core.Models.AppUser", null)
+                    b.HasOne("BSNU.Core.Models.StaffMember", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -782,16 +757,11 @@ namespace BSNU.Repository.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("BSNU.Core.Models.AppUser", null)
+                    b.HasOne("BSNU.Core.Models.StaffMember", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BSNU.Core.Models.AppUser", b =>
-                {
-                    b.Navigation("StaffMember");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Category", b =>

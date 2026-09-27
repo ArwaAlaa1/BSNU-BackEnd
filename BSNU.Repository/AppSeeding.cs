@@ -12,7 +12,7 @@ namespace BSNU.Repository
 {
     public static class AppSeeding
     {
-        public static async Task SeedUsersAsync(UserManager<AppUser> _usermanager, RoleManager<IdentityRole> _roleManager, BSNUDbContext dbContext)
+        public static async Task SeedUsersAsync(UserManager<StaffMember> _usermanager, RoleManager<IdentityRole> _roleManager, BSNUDbContext dbContext)
         {
             if (_usermanager.Users.Count() == 0)
             {
@@ -33,10 +33,10 @@ namespace BSNU.Repository
                     }
                 }
                 // 1) Create the users
-                var admin = new AppUser { UserName = "admin@example.com", Email = "admin@example.com" };
-                var dean = new AppUser { UserName = "dean@example.com", Email = "dean@example.com" };
-                var programManager = new AppUser { UserName = "pm@example.com", Email = "pm@example.com" };
-                var viceDean = new AppUser { UserName = "vdean@example.com", Email = "vdean@example.com" };
+                var admin = new StaffMember { UserName = "admin@example.com", Email = "admin@example.com" };
+                var dean = new StaffMember { UserName = "dean@example.com", Email = "dean@example.com" };
+                var programManager = new StaffMember { UserName = "pm@example.com", Email = "pm@example.com" };
+                var viceDean = new StaffMember { UserName = "vdean@example.com", Email = "vdean@example.com" };
 
                 await _usermanager.CreateAsync(admin, "P@ssWord1");
                 await _usermanager.CreateAsync(dean, "P@ssWord1");

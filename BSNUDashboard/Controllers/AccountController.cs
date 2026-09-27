@@ -9,10 +9,10 @@ namespace BSNUDashboard.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<StaffMember> _userManager;
+        private readonly SignInManager<StaffMember> _signInManager;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<StaffMember> userManager, SignInManager<StaffMember> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
