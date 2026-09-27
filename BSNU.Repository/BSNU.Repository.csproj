@@ -23,4 +23,9 @@
     <ProjectReference Include="..\BSNU.Core\BSNU.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Configrations\" />
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>

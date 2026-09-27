@@ -26,7 +26,7 @@ namespace BSNU_Api
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-      
+          
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddDbContext<BSNUDbContext>(options =>

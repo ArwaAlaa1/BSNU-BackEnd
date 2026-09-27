@@ -13,7 +13,7 @@ namespace BSNU.Core.Models
         public string ImageUrl { get; set; }
 
         public int? ProgramId { get; set; }
-        public ProgramEntite Program { get; set; }
+        public Programs Program { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
     }

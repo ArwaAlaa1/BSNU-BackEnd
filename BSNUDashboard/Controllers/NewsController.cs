@@ -42,66 +42,66 @@ namespace BSNUDashboard.Controllers
         }
 
 
-        public async Task<ActionResult> Create()
-        {
-            var categories = await _unitOfWork.Repository<Category>().GetAllAsync();
-            var programs = await _unitOfWork.Repository<ProgramEntite>().GetAllAsync();
+        //public async Task<ActionResult> Create()
+        //{
+        //    var categories = await _unitOfWork.Repository<Category>().GetAllAsync();
+        //    var programs = await _unitOfWork.Repository<ProgramEntite>().GetAllAsync();
 
-            var model = new NewsVM
-            {
-                Categories = categories.Select(c => new SelectListItem
-                {
-                    Value = c.Id.ToString(),
-                    Text = c.Name
-                }),
-                Programs = programs.Select(p => new SelectListItem
-                {
-                    Value = p.Id.ToString(),
-                    Text = p.Name
-                })
-            };
+        //    var model = new NewsVM
+        //    {
+        //        Categories = categories.Select(c => new SelectListItem
+        //        {
+        //            Value = c.Id.ToString(),
+        //            Text = c.Name
+        //        }),
+        //        Programs = programs.Select(p => new SelectListItem
+        //        {
+        //            Value = p.Id.ToString(),
+        //            Text = p.Name
+        //        })
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
 
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NewsVM model)
-        {
-            if (!ModelState.IsValid)
-            {
-                // إعادة تحميل الـ dropdowns في حالة الخطأ
-                model.Categories = (await _unitOfWork.Repository<Category>().GetAllAsync())
-                    .Select(c => new SelectListItem
-                    {
-                        Value = c.Id.ToString(),
-                        Text = c.Name
-                    });
+        //[Authorize]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(NewsVM model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        // إعادة تحميل الـ dropdowns في حالة الخطأ
+        //        model.Categories = (await _unitOfWork.Repository<Category>().GetAllAsync())
+        //            .Select(c => new SelectListItem
+        //            {
+        //                Value = c.Id.ToString(),
+        //                Text = c.Name
+        //            });
 
-                model.Programs = (await _unitOfWork.Repository<ProgramEntite>().GetAllAsync())
-                    .Select(p => new SelectListItem
-                    {
-                        Value = p.Id.ToString(),
-                        Text = p.Name
-                    });
+        //        model.Programs = (await _unitOfWork.Repository<ProgramEntite>().GetAllAsync())
+        //            .Select(p => new SelectListItem
+        //            {
+        //                Value = p.Id.ToString(),
+        //                Text = p.Name
+        //            });
 
-                return View(model);
-            }
+        //        return View(model);
+        //    }
 
-            if (model.ImageFile != null)
-            {
-                model.Image = HandlerPhotos.UploadPhoto(model.ImageFile, "News");
-            }
+        //    if (model.ImageFile != null)
+        //    {
+        //        model.Image = HandlerPhotos.UploadPhoto(model.ImageFile, "News");
+        //    }
 
-            var news = _mapper.Map<News>(model);
+        //    var news = _mapper.Map<News>(model);
 
-            await  _unitOfWork.Repository<News>().AddAsync(news);
-            await _unitOfWork.CompleteAsync();
+        //    await  _unitOfWork.Repository<News>().AddAsync(news);
+        //    await _unitOfWork.CompleteAsync();
 
-            return RedirectToAction(nameof(Index));
-        }
+        //    return RedirectToAction(nameof(Index));
+        //}
 
 
         // GET: NewsController/Edit/5

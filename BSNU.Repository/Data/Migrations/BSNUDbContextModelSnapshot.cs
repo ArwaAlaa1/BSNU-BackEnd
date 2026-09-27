@@ -41,6 +41,12 @@ namespace BSNU.Repository.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -156,6 +162,42 @@ namespace BSNU.Repository.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("BSNU.Core.Models.Faculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DeanId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DescriptionAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SectorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeanId");
+
+                    b.HasIndex("SectorId");
+
+                    b.ToTable("Faculties");
+                });
+
             modelBuilder.Entity("BSNU.Core.Models.News", b =>
                 {
                     b.Property<int>("Id")
@@ -203,7 +245,7 @@ namespace BSNU.Repository.Data.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.ProgramEntite", b =>
+            modelBuilder.Entity("BSNU.Core.Models.ProgramBeneficiary", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,67 +253,24 @@ namespace BSNU.Repository.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AcadamicDegree")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreditHour")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Goals")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Mission")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NumberOfStudents")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Vision")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("jopTitel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("ProgramId");
 
-                    b.ToTable("Programs");
+                    b.ToTable("ProgramBeneficiary");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.Programtabel", b =>
+            modelBuilder.Entity("BSNU.Core.Models.ProgramGoal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -279,7 +278,11 @@ namespace BSNU.Repository.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CreditsHours")
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
 
                     b.Property<int>("ProgramId")
@@ -289,7 +292,204 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("Programtabels");
+                    b.ToTable("ProgramGoal");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.ProgramRequirement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CreditHours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RequirementName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.ToTable("ProgramRequirement");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.ProgramSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AcademicYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("CreditHours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Semester")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.ToTable("ProgramSchedule");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Programs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AcademicDegree")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("CreditHours")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("DescriptionAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Duration")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobTitles")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mission")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProgramManagerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentsCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudySystem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Vision")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("ProgramManagerId");
+
+                    b.ToTable("Programs");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Sector", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("DescriptionAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sectors");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.StaffMember", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BioAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BioEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionAr")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("StaffMembers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -425,6 +625,23 @@ namespace BSNU.Repository.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BSNU.Core.Models.Faculty", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.StaffMember", "Dean")
+                        .WithMany()
+                        .HasForeignKey("DeanId");
+
+                    b.HasOne("BSNU.Core.Models.Sector", "Sector")
+                        .WithMany("Faculties")
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dean");
+
+                    b.Navigation("Sector");
+                });
+
             modelBuilder.Entity("BSNU.Core.Models.News", b =>
                 {
                     b.HasOne("BSNU.Core.Models.Category", "Category")
@@ -433,7 +650,7 @@ namespace BSNU.Repository.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BSNU.Core.Models.ProgramEntite", "Program")
+                    b.HasOne("BSNU.Core.Models.Programs", "Program")
                         .WithMany()
                         .HasForeignKey("ProgramId");
 
@@ -442,26 +659,80 @@ namespace BSNU.Repository.Data.Migrations
                     b.Navigation("Program");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.ProgramEntite", b =>
+            modelBuilder.Entity("BSNU.Core.Models.ProgramBeneficiary", b =>
                 {
-                    b.HasOne("BSNU.Core.Models.AppUser", "User")
-                        .WithOne("Program")
-                        .HasForeignKey("BSNU.Core.Models.ProgramEntite", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BSNU.Core.Models.Programtabel", b =>
-                {
-                    b.HasOne("BSNU.Core.Models.ProgramEntite", "Program")
-                        .WithMany("Programtabels")
+                    b.HasOne("BSNU.Core.Models.Programs", "Program")
+                        .WithMany("Beneficiaries")
                         .HasForeignKey("ProgramId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.ProgramGoal", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.Programs", "Program")
+                        .WithMany("Goals")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.ProgramRequirement", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.Programs", "Program")
+                        .WithMany("Requirements")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.ProgramSchedule", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.Programs", "Program")
+                        .WithMany("Schedules")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Programs", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.Faculty", "Faculty")
+                        .WithMany("Programs")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BSNU.Core.Models.StaffMember", "ProgramManager")
+                        .WithMany("ManagedPrograms")
+                        .HasForeignKey("ProgramManagerId");
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("ProgramManager");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.StaffMember", b =>
+                {
+                    b.HasOne("BSNU.Core.Models.Faculty", null)
+                        .WithMany("StaffMembers")
+                        .HasForeignKey("FacultyId");
+
+                    b.HasOne("BSNU.Core.Models.AppUser", "User")
+                        .WithOne("StaffMember")
+                        .HasForeignKey("BSNU.Core.Models.StaffMember", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -517,8 +788,7 @@ namespace BSNU.Repository.Data.Migrations
 
             modelBuilder.Entity("BSNU.Core.Models.AppUser", b =>
                 {
-                    b.Navigation("Program")
-                        .IsRequired();
+                    b.Navigation("StaffMember");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Category", b =>
@@ -526,9 +796,32 @@ namespace BSNU.Repository.Data.Migrations
                     b.Navigation("News");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.ProgramEntite", b =>
+            modelBuilder.Entity("BSNU.Core.Models.Faculty", b =>
                 {
-                    b.Navigation("Programtabels");
+                    b.Navigation("Programs");
+
+                    b.Navigation("StaffMembers");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Programs", b =>
+                {
+                    b.Navigation("Beneficiaries");
+
+                    b.Navigation("Goals");
+
+                    b.Navigation("Requirements");
+
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.Sector", b =>
+                {
+                    b.Navigation("Faculties");
+                });
+
+            modelBuilder.Entity("BSNU.Core.Models.StaffMember", b =>
+                {
+                    b.Navigation("ManagedPrograms");
                 });
 #pragma warning restore 612, 618
         }

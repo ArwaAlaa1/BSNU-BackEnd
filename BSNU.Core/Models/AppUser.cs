@@ -9,6 +9,9 @@ namespace BSNU.Core.Models
 {
     public class AppUser:IdentityUser
     {
-        public ProgramEntite Program { get; set; }
+        public string? FullName { get; set; }
+        public string? ImagePath { get; set; }
+
+        public StaffMember? StaffMember { get; set; }
     }
 }

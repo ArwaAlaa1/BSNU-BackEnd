@@ -22,11 +22,6 @@ namespace BSNU.Repository.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
-            modelBuilder.Entity<ProgramEntite>()
-        .HasOne(p => p.User)
-        .WithOne(u => u.Program)
-        .HasForeignKey<ProgramEntite>(p => p.UserId);
-       
 
             modelBuilder.Entity<News>()
          .HasOne(n => n.Category)
@@ -37,13 +32,13 @@ namespace BSNU.Repository.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
-        public DbSet<ProgramEntite> Programs { get; set; }
         public DbSet<News> News { get; set; }
 
-
+        public DbSet<Sector> Sectors => Set<Sector>();
+        public DbSet<Faculty> Faculties => Set<Faculty>();
+        public DbSet<Programs> Programs => Set<Programs>();
+        public DbSet<StaffMember> StaffMembers => Set<StaffMember>();
         public DbSet<Category> Categories { get; set; }
-
-        public DbSet<Programtabel> Programtabels { get; set; }
         public DbSet<Banner> Banners { get; set; }
 
     }
