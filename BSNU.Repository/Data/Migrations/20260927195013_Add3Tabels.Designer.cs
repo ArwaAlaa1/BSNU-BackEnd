@@ -4,6 +4,7 @@ using BSNU.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BSNU.Repository.Data.Migrations
 {
     [DbContext(typeof(BSNUDbContext))]
-    partial class BSNUDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260927195013_Add3Tabels")]
+    partial class Add3Tabels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("AdmissionRuleId");
 
-                    b.ToTable("AdmissionDocuments", (string)null);
+                    b.ToTable("AdmissionDocuments");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.AdmissionRule", b =>
@@ -100,7 +103,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AdmissionRules", (string)null);
+                    b.ToTable("AdmissionRules");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.AppUser", b =>
@@ -207,7 +210,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Banners", (string)null);
+                    b.ToTable("Banners");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Category", b =>
@@ -240,7 +243,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Faculty", b =>
@@ -276,7 +279,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("SectorId");
 
-                    b.ToTable("Faculties", (string)null);
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.News", b =>
@@ -323,7 +326,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("News", (string)null);
+                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.ProgramBeneficiary", b =>
@@ -348,7 +351,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramBeneficiary", (string)null);
+                    b.ToTable("ProgramBeneficiary");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.ProgramGoal", b =>
@@ -373,7 +376,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramGoal", (string)null);
+                    b.ToTable("ProgramGoal");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.ProgramRequirement", b =>
@@ -401,7 +404,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramRequirement", (string)null);
+                    b.ToTable("ProgramRequirement");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.ProgramSchedule", b =>
@@ -437,7 +440,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("ProgramSchedule", (string)null);
+                    b.ToTable("ProgramSchedule");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Programs", b =>
@@ -500,7 +503,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramManagerId");
 
-                    b.ToTable("Programs", (string)null);
+                    b.ToTable("Programs");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Sector", b =>
@@ -526,7 +529,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sectors", (string)null);
+                    b.ToTable("Sectors");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.StaffMember", b =>
@@ -570,7 +573,7 @@ namespace BSNU.Repository.Data.Migrations
                     b.HasIndex("UserId")
                         .IsUnique();
 
-                    b.ToTable("StaffMembers", (string)null);
+                    b.ToTable("StaffMembers");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.TuitionFees", b =>
@@ -614,7 +617,7 @@ namespace BSNU.Repository.Data.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("TuitionFee", (string)null);
+                    b.ToTable("TuitionFee");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace BSNU.Repository.Data
 {
-   public class BSNUDbContext :IdentityDbContext<AppUser>
+    public class BSNUDbContext : IdentityDbContext<AppUser>
     {
         public BSNUDbContext(DbContextOptions<BSNUDbContext> options)
             : base(options)
-    { }
+        { }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,5 +41,10 @@ namespace BSNU.Repository.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Banner> Banners { get; set; }
 
+        public DbSet<AdmissionRule> AdmissionRules { get; set; }
+
+        public DbSet<TuitionFees> TuitionFee { get; set; }
+
+        public DbSet<AdmissionDocument> AdmissionDocuments { get; set; }
     }
 }
