@@ -25,7 +25,7 @@ namespace BSNU_Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+         //   builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
           
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();

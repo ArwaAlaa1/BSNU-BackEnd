@@ -47,6 +47,6 @@ namespace BSNU.Core.Models
         public ICollection<ProgramRequirement> Requirements { get; set; } = [];
         public ICollection<ProgramSchedule> Schedules { get; set; } = [];
         //public ICollection<ProgramEvent> Events { get; set; } = [];
-        //public ICollection<TuitionFee> TuitionFees { get; set; } = [];
+        public ICollection<TuitionFees> TuitionFees { get; set; } = [];
     }
 }
