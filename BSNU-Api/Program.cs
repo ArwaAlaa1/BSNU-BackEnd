@@ -5,6 +5,7 @@ using BSNU.Core.Repository.Contract;
 using BSNU.Repository;
 using BSNU.Repository.Data;
 using BSNU.Repository.Repositories;
+using BSNU.Service;
 using BSNU_Api.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -28,6 +29,10 @@ namespace BSNU_Api
             builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
           
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
+            builder.Services.AddScoped<IFacultyService, FacultyService>();
+            builder.Services.AddScoped<ISectorRepository, SectorRepository>();
+            builder.Services.AddScoped<ISectorService, SectorService>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddDbContext<BSNUDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),

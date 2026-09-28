@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174
+# Visual Studio Version 18
+VisualStudioVersion = 18.10.12210.168 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSNU-Api", "BSNU-Api.csproj", "{78573990-1EAA-4ACA-8AE9-DAECBF15300B}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSNU.Core", "..\BSNU.Core\BSNU.Core.csproj", "{FC9C2901-F812-40B5-BB82-1045E55B10B9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSNU.Repository", "..\BSNU.Repository\BSNU.Repository.csproj", "{804C87A1-C43E-4D77-AAF0-E9A38AABBDCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSNU.Service", "..\BSNU.Service\BSNU.Service.csproj", "{B781359D-B3F1-432D-922A-6D71B0FDB4C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{804C87A1-C43E-4D77-AAF0-E9A38AABBDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{804C87A1-C43E-4D77-AAF0-E9A38AABBDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{804C87A1-C43E-4D77-AAF0-E9A38AABBDCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B781359D-B3F1-432D-922A-6D71B0FDB4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B781359D-B3F1-432D-922A-6D71B0FDB4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B781359D-B3F1-432D-922A-6D71B0FDB4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B781359D-B3F1-432D-922A-6D71B0FDB4C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,16 +6,13 @@ using System.Threading.Tasks;
 
 namespace BSNU.Core.Models
 {
-    public class Sector
+    public class Sector:BaseEntity
     {
-        public int Id { get; set; }
-
         public string NameEn { get; set; } = null!;
         public string? NameAr { get; set; }
-
-        public string? DescriptionEn { get; set; }
-        public string? DescriptionAr { get; set; }
-
+        public string SubTitleAr { get; set; } = null!;
+        public string SubTitleEn { get; set; } = null!;
+        public string Image { get; set; }
         public ICollection<Faculty> Faculties { get; set; } = [];
     }
 }

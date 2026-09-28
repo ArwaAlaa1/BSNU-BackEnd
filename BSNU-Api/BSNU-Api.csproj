@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BSNU.Core\BSNU.Core.csproj" />
     <ProjectReference Include="..\BSNU.Repository\BSNU.Repository.csproj" />
+    <ProjectReference Include="..\BSNU.Service\BSNU.Service.csproj" />
   </ItemGroup>
 
 </Project>

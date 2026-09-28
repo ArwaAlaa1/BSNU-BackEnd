@@ -18,38 +18,55 @@ namespace BSNU.Repository
             {
 
 
-                var roles = new List<IdentityRole>
-{
-    new IdentityRole { Name = "Admin" },
-    new IdentityRole { Name = "DeanOfSector" },
-    new IdentityRole { Name = "ProgramManager" },
-    new IdentityRole { Name = "ViceDean" }
-};
-                foreach (var role in roles)
+                //                var roles = new List<IdentityRole>
+                //{
+                //    new IdentityRole { Name = "Admin" },
+                //    new IdentityRole { Name = "DeanOfSector" },
+                //    new IdentityRole { Name = "ProgramManager" },
+                //    new IdentityRole { Name = "ViceDean" }
+                //};
+                //                foreach (var role in roles)
+                //                {
+                //                    if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                //                    {
+                //                        await _roleManager.CreateAsync(role);
+                //                    }
+                //                }
+                //                // 1) Create the users
+                //                var admin = new StaffMember { UserName = "admin@example.com", Email = "admin@example.com" };
+                //                var dean = new StaffMember { UserName = "dean@example.com", Email = "dean@example.com" };
+                //                var programManager = new StaffMember { UserName = "pm@example.com", Email = "pm@example.com" };
+                //                var viceDean = new StaffMember { UserName = "vdean@example.com", Email = "vdean@example.com" };
+
+                //                await _usermanager.CreateAsync(admin, "P@ssWord1");
+                //                await _usermanager.CreateAsync(dean, "P@ssWord1");
+                //                await _usermanager.CreateAsync(programManager, "P@ssWord1");
+                //                await _usermanager.CreateAsync(viceDean, "P@ssWord1");
+
+                //                // 2) Assign each user to its role
+                //                await _usermanager.AddToRoleAsync(admin, "Admin");
+                //                await _usermanager.AddToRoleAsync(dean, "DeanOfSector");
+                //                await _usermanager.AddToRoleAsync(programManager, "ProgramManager");
+                //                await _usermanager.AddToRoleAsync(viceDean, "ViceDean");
+
+                if (_usermanager.Users.Count() == 0)
                 {
-                    if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                    if (dbContext.Users.Count() == 0)
                     {
-                        await _roleManager.CreateAsync(role);
+                        var staffMembers = File.ReadAllText(".././BSNU.Repository/Data/DataSeeding/StaffMember.json");
+                        var methods = JsonSerializer.Deserialize<List<StaffMember>>(staffMembers);
+                        if (methods.Count() > 0)
+                        {
+                            foreach (var item in methods)
+                            {
+                              dbContext.Set<StaffMember>().Add(item);
+                            }
+                            await dbContext.SaveChangesAsync();
+
+                        }
                     }
+
                 }
-                // 1) Create the users
-                var admin = new StaffMember { UserName = "admin@example.com", Email = "admin@example.com" };
-                var dean = new StaffMember { UserName = "dean@example.com", Email = "dean@example.com" };
-                var programManager = new StaffMember { UserName = "pm@example.com", Email = "pm@example.com" };
-                var viceDean = new StaffMember { UserName = "vdean@example.com", Email = "vdean@example.com" };
-
-                await _usermanager.CreateAsync(admin, "P@ssWord1");
-                await _usermanager.CreateAsync(dean, "P@ssWord1");
-                await _usermanager.CreateAsync(programManager, "P@ssWord1");
-                await _usermanager.CreateAsync(viceDean, "P@ssWord1");
-
-                // 2) Assign each user to its role
-                await _usermanager.AddToRoleAsync(admin, "Admin");
-                await _usermanager.AddToRoleAsync(dean, "DeanOfSector");
-                await _usermanager.AddToRoleAsync(programManager, "ProgramManager");
-                await _usermanager.AddToRoleAsync(viceDean, "ViceDean");
-
-
 
             }
 

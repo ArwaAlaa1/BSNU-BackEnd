@@ -4,16 +4,19 @@ using BSNU.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BSNU.Repository.Data.migrations
+namespace BSNU.Repository.Data.Migrations
 {
     [DbContext(typeof(BSNUDbContext))]
-    partial class BSNUDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260928083828_AddImagesInSectorAndFaculty")]
+    partial class AddImagesInSectorAndFaculty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

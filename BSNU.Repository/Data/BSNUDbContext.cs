@@ -37,7 +37,6 @@ namespace BSNU.Repository.Data
         public DbSet<Sector> Sectors => Set<Sector>();
         public DbSet<Faculty> Faculties => Set<Faculty>();
         public DbSet<Programs> Programs => Set<Programs>();
-        public DbSet<StaffMember> StaffMembers => Set<StaffMember>();
         public DbSet<Category> Categories { get; set; }
         public DbSet<Banner> Banners { get; set; }
 
