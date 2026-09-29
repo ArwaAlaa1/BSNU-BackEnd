@@ -14,6 +14,6 @@ namespace BSNU.Core.Models
 
         public int DisplayOrder { get; set; }
 
-        public ICollection<AdmissionDocument> Documents { get; set; } = [];
+      public  AdmissionDocument Documents { get; set; } 
     }
 }
