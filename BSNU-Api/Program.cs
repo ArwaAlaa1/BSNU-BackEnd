@@ -25,9 +25,11 @@ namespace BSNU_Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-         //   builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-          
+            //   builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+          //  builder.Services.AddScoped<NewsRepositries>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<INewsRepository, NewsRepository>();
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddDbContext<BSNUDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),

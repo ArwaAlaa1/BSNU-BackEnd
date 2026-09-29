@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BSNU.Core.Repository.Contract
 {
-    public  interface ITuitionFeesRepository
+    public  interface ITuitionFeesRepository : IGenericRepository<TuitionFees>
     {
         public Task<IReadOnlyList<TuitionFees>?> GetAllTuitionFeesWithProgramNameAsync();
     }

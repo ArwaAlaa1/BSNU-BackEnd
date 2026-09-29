@@ -12,13 +12,11 @@ namespace BSNU_Api.Controllers
     [ApiController]
     public class NewsController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly INewsRepository _newsRepository;
 
-        public NewsController(IUnitOfWork unitOfWork, IMapper mapper,INewsRepository newsRepository)
+        public NewsController( IMapper mapper,INewsRepository newsRepository)
         {
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
             _newsRepository = newsRepository;
         }
@@ -39,8 +37,8 @@ namespace BSNU_Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<NewsDto>> GetById(int id)
         {
-            var news = await _unitOfWork.Repository<News>()
-                .GetByIdAsync(id);
+            var news = await _newsRepository.GetByIdAsync(id);
+              
 
             if (news == null)
                 return NotFound(new { message = "News not found" });

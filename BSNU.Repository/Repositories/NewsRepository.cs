@@ -19,8 +19,6 @@ namespace BSNU.Repository.Repositories
         public Task<List<News>> GetAllNewsWithDetails()
         {
            var newsWithDetails =  _db.News
-                .Include(n => n.Program)
-                .Include(n => n.Category)
                 .ToListAsync();
             return newsWithDetails;
         }
@@ -29,8 +27,6 @@ namespace BSNU.Repository.Repositories
         {
             var news = _db.News
                 .Where( i=>i.Id==id)
-                .Include(n => n.Program)
-                .Include(n => n.Category)
                 .FirstOrDefaultAsync();
             return news;
         }

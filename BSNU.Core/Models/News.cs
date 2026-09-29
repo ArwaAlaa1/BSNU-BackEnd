@@ -8,14 +8,19 @@ namespace BSNU.Core.Models
 {
     public class News : BaseEntity
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string ImageUrl { get; set; }
+            public string TitleEn { get; set; } = null!;
+            public string? TitleAr { get; set; }
 
-        public int? ProgramId { get; set; }
-        public Programs Program { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+            public string DescriptionEn { get; set; } = null!;
+            public string? DescriptionAr { get; set; }
+
+            public string? ImagePath { get; set; }
+
+            public DateTime? PublishedAt { get; set; }
+
+            public bool IsPublished { get; set; }
+
+            public int DisplayOrder { get; set; }
     }
 
 }

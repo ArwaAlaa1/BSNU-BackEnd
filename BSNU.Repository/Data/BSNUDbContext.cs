@@ -23,11 +23,7 @@ namespace BSNU.Repository.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
 
-            modelBuilder.Entity<News>()
-         .HasOne(n => n.Category)
-         .WithMany(c => c.News)
-         .HasForeignKey(n => n.CategoryId)
-         .OnDelete(DeleteBehavior.Restrict);
+          
 
         }
 
