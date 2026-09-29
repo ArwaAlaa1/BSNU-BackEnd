@@ -9,7 +9,8 @@ namespace BSNU.Core.Models
 {
     public class StaffMember : IdentityUser
     {
-            public string JobTitle { get; set; } = null!;
+            public string JobTitleAr{ get; set; } = null!;
+            public string JobTitleEn { get; set; } = null!;
             public string? DescriptionEn { get; set; }
             public string? DescriptionAr { get; set; }
             public string? BioEn { get; set; }

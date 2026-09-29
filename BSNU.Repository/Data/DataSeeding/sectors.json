@@ -1,0 +1,23 @@
+[
+  {
+    "NameEn": "Medical Sector",
+    "NameAr": "القطاع الطبي",
+    "SubTitleAr": "برامج صحية للمتخصصين في المجال الطبي في المستقبل.",
+    "SubTitleEn": "Health programs for future medical professionals.",
+    "Image": ""
+  },
+  {
+    "NameEn": "Engineering Sector",
+    "NameAr": "قطاع الهندسة",
+    "SubTitleAr": "برامج هندسية مبتكرة لبُناة الغد.",
+    "SubTitleEn": "Innovative engineering programs for tomorrow’s builders.",
+    "Image": ""
+  },
+  {
+    "NameEn": "Education & Humanities Sector",
+    "NameAr": "قطاع التعليم والعلوم الإنسانية",
+    "SubTitleAr": "البرامج التي تدعم تنمية المجتمع والقانون والإعلام.",
+    "SubTitleEn": "Programs that support community, law, and media development.",
+    "Image": ""
+  }
+]

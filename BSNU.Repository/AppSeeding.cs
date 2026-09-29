@@ -69,9 +69,62 @@ namespace BSNU.Repository
                 }
 
             }
+            if (dbContext.Sectors.Count() == 0)
+            {
+                if (dbContext.Sectors.Count() == 0)
+                {
+                    var sectors = File.ReadAllText(".././BSNU.Repository/Data/DataSeeding/sectors.json");
+                    var methods = JsonSerializer.Deserialize<List<Sector>>(sectors);
+                    if (methods.Count() > 0)
+                    {
+                        foreach (var item in methods)
+                        {
+                            dbContext.Set<Sector>().Add(item);
+                        }
+                        await dbContext.SaveChangesAsync();
 
+                    }
+                }
 
+            }
+            if (dbContext.Programs.Count() == 0)
+            {
+                if (dbContext.Programs.Count() == 0)
+                {
+                    var programs = File.ReadAllText(".././BSNU.Repository/Data/DataSeeding/Programs.json");
+                    var methods = JsonSerializer.Deserialize<List<Programs>>(programs);
+                    if (methods.Count() > 0)
+                    {
+                        foreach (var item in methods)
+                        {
+                            dbContext.Set<Programs>().Add(item);
+                        }
+                        await dbContext.SaveChangesAsync();
 
+                    }
+                }
+
+            }
+            if (dbContext.Faculties.Count() == 0)
+            {
+                if (dbContext.Faculties.Count() == 0)
+                {
+                    var faculties = File.ReadAllText(".././BSNU.Repository/Data/DataSeeding/Faculties.json");
+                    var methods = JsonSerializer.Deserialize<List<Faculty>>(faculties);
+                    if (methods.Count() > 0)
+                    {
+                        foreach (var item in methods)
+                        {
+                            dbContext.Set<Faculty>().Add(item);
+                        }
+                        await dbContext.SaveChangesAsync();
+
+                    }
+                }
+
+            }
         }
+
+
     }
 }
