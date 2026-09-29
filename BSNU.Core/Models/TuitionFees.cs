@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BSNU.Core.Models
@@ -18,6 +19,10 @@ namespace BSNU.Core.Models
 
         public string Currency { get; set; } = "EGP";
 
+        [ForeignKey("Program")]
+        public int Programid { get; set; }
         public Programs Program { get; set; } = null!;
+
+       
     }
 }

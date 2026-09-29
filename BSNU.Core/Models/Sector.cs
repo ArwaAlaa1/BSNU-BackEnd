@@ -16,6 +16,10 @@ namespace BSNU.Core.Models
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
 
+        public ICollection<Programs> Programs { get; set; } = [];
+
         public ICollection<Faculty> Faculties { get; set; } = [];
+
+        public ICollection<TuitionFees> TuitionFees { get; set; } = [];
     }
 }

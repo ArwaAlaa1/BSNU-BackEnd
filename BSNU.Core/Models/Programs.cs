@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,11 +43,17 @@ namespace BSNU.Core.Models
 
         public StaffMember? ProgramManager { get; set; }
 
+        [ForeignKey("Sector")]
+        public int SectorId { get; set; }
+        public Sector sector { get; set; } 
+
         public ICollection<ProgramGoal> Goals { get; set; } = [];
         public ICollection<ProgramBeneficiary> Beneficiaries { get; set; } = [];
         public ICollection<ProgramRequirement> Requirements { get; set; } = [];
         public ICollection<ProgramSchedule> Schedules { get; set; } = [];
         //public ICollection<ProgramEvent> Events { get; set; } = [];
         public ICollection<TuitionFees> TuitionFees { get; set; } = [];
+
+      
     }
 }
