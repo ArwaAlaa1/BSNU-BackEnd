@@ -30,6 +30,8 @@ namespace BSNU_Api
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<INewsRepository, NewsRepository>();
+            builder.Services.AddScoped<IFAQRepository, FAQRepository>();
+
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             builder.Services.AddDbContext<BSNUDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")),

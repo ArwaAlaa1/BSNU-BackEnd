@@ -42,5 +42,7 @@ namespace BSNU.Repository.Data
         public DbSet<TuitionFees> TuitionFee { get; set; }
 
         public DbSet<AdmissionDocument> AdmissionDocuments { get; set; }
+        public DbSet<FAQ> FAQs { get; set; }
+
     }
 }
