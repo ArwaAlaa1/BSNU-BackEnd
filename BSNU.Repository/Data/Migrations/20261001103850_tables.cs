@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BSNU.Repository.Data.migrations
+namespace BSNU.Repository.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class basicTables : Migration
+    public partial class tables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +23,39 @@ namespace BSNU.Repository.Data.migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    JobTitleAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobTitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DescriptionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BioEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BioAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,22 +96,6 @@ namespace BSNU.Repository.Data.migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sectors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DescriptionAr = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sectors", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -112,6 +129,12 @@ namespace BSNU.Repository.Data.migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -126,6 +149,12 @@ namespace BSNU.Repository.Data.migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,39 +173,12 @@ namespace BSNU.Repository.Data.migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DescriptionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BioEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BioAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FacultyId = table.Column<int>(type: "int", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,6 +202,33 @@ namespace BSNU.Repository.Data.migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sectors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubTitleAr = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubTitleEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeanId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sectors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Sectors_AspNetUsers_DeanId",
+                        column: x => x.DeanId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Faculties",
                 columns: table => new
                 {
@@ -208,17 +237,22 @@ namespace BSNU.Repository.Data.migrations
                     SectorId = table.Column<int>(type: "int", nullable: false),
                     NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescriptionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeanId = table.Column<int>(type: "int", nullable: true),
-                    DeanId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    DeanId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Faculties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Faculties_AspNetUsers_DeanId1",
-                        column: x => x.DeanId1,
+                        name: "FK_Faculties_AspNetUsers_DeanId",
+                        column: x => x.DeanId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -236,28 +270,38 @@ namespace BSNU.Repository.Data.migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FacultyId = table.Column<int>(type: "int", nullable: false),
-                    ProgramManagerId = table.Column<int>(type: "int", nullable: true),
+                    ProgramManagerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     NameEn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NameAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescriptionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DescriptionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudySystem = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreditHours = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    AcademicDegree = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DurationEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DurationAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudySystemEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudySystemAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreditHoursEn = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CreditHoursAr = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    AcademicDegreeEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AcademicDegreeAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StudentsCount = table.Column<int>(type: "int", nullable: true),
-                    JobTitles = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Mission = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Vision = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProgramManagerId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    JobTitlesEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JobTitlesAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MissionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MissionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VisionEn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VisionAr = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Programs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Programs_AspNetUsers_ProgramManagerId1",
-                        column: x => x.ProgramManagerId1,
+                        name: "FK_Programs_AspNetUsers_ProgramManagerId",
+                        column: x => x.ProgramManagerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -336,6 +380,32 @@ namespace BSNU.Repository.Data.migrations
                     table.PrimaryKey("PK_ProgramGoal", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ProgramGoal_Programs_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "Programs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProgramImage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProgramId = table.Column<int>(type: "int", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    DisplayOrder = table.Column<int>(type: "int", nullable: false),
+                    IsMain = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProgramImage_Programs_ProgramId",
                         column: x => x.ProgramId,
                         principalTable: "Programs",
                         principalColumn: "Id",
@@ -422,11 +492,6 @@ namespace BSNU.Repository.Data.migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_FacultyId",
-                table: "AspNetUsers",
-                column: "FacultyId");
-
-            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -434,9 +499,9 @@ namespace BSNU.Repository.Data.migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Faculties_DeanId1",
+                name: "IX_Faculties_DeanId",
                 table: "Faculties",
-                column: "DeanId1");
+                column: "DeanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Faculties_SectorId",
@@ -464,6 +529,11 @@ namespace BSNU.Repository.Data.migrations
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProgramImage_ProgramId",
+                table: "ProgramImage",
+                column: "ProgramId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProgramRequirement_ProgramId",
                 table: "ProgramRequirement",
                 column: "ProgramId");
@@ -474,54 +544,24 @@ namespace BSNU.Repository.Data.migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Programs_ProgramManagerId1",
+                name: "IX_Programs_ProgramManagerId",
                 table: "Programs",
-                column: "ProgramManagerId1");
+                column: "ProgramManagerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProgramSchedule_ProgramId",
                 table: "ProgramSchedule",
                 column: "ProgramId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                table: "AspNetUserRoles",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_Faculties_FacultyId",
-                table: "AspNetUsers",
-                column: "FacultyId",
-                principalTable: "Faculties",
-                principalColumn: "Id");
+            migrationBuilder.CreateIndex(
+                name: "IX_Sectors_DeanId",
+                table: "Sectors",
+                column: "DeanId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Faculties_AspNetUsers_DeanId1",
-                table: "Faculties");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -550,6 +590,9 @@ namespace BSNU.Repository.Data.migrations
                 name: "ProgramGoal");
 
             migrationBuilder.DropTable(
+                name: "ProgramImage");
+
+            migrationBuilder.DropTable(
                 name: "ProgramRequirement");
 
             migrationBuilder.DropTable(
@@ -565,13 +608,13 @@ namespace BSNU.Repository.Data.migrations
                 name: "Programs");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "Sectors");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

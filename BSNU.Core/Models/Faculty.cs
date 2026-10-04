@@ -18,13 +18,13 @@ namespace BSNU.Core.Models
         public string? DescriptionEn { get; set; }
         public string? DescriptionAr { get; set; }
 
-        public int? DeanId { get; set; }
+        public string? DeanId { get; set; }
 
         public Sector Sector { get; set; } = null!;
 
         public StaffMember? Dean { get; set; }
 
         public ICollection<Programs> Programs { get; set; } = new List<Programs>();
-        public ICollection<StaffMember> StaffMembers { get; set; } = new List<StaffMember>();
+        //public ICollection<StaffMember> StaffMembers { get; set; } = new List<StaffMember>();
     }
 }

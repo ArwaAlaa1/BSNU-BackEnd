@@ -17,7 +17,9 @@ namespace BSNU.Repository.Repositories
         public Task<List<Sector>> GetAllSectorsWithDetails()
         {
             var sectors = _db.Sectors
+                .Include(d=>d.Dean)
                 .Include(s => s.Faculties)
+                .ThenInclude(p=>p.Programs)
                 .Where(s => !s.IsDeleted)
                 .ToListAsync();
 

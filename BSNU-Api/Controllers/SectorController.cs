@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BSNU.Service;
 using System.Threading.Tasks;
+using BSNU_Api.Dtos;
 
 namespace BSNU_Api.Controllers
 {
@@ -16,7 +17,7 @@ namespace BSNU_Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<SectorDto>> GetAll()
         {
             var sectors = await _sectorService.GetAllAsync();
             return Ok(sectors);

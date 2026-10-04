@@ -20,7 +20,7 @@ namespace BSNU.Repository.Repositories
                 .Include(f => f.Sector)
                 .Include(f => f.Dean)
                 .Include(f => f.Programs)
-                .Include(f => f.StaffMembers)
+                //.Include(f => f.StaffMembers)
                 .Where(f => !f.IsDeleted)
                 .ToListAsync();
 
@@ -34,7 +34,7 @@ namespace BSNU.Repository.Repositories
                 .Include(f => f.Sector)
                 .Include(f => f.Dean)
                 .Include(f => f.Programs)
-                .Include(f => f.StaffMembers)
+                //.Include(f => f.StaffMembers)
                 .FirstOrDefaultAsync();
 
             return faculty!;

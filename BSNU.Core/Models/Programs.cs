@@ -11,7 +11,7 @@ namespace BSNU.Core.Models
 
         public int FacultyId { get; set; }
 
-        public int? ProgramManagerId { get; set; }
+        public string? ProgramManagerId { get; set; }
 
         public string NameEn { get; set; } = null!;
         public string? NameAr { get; set; }

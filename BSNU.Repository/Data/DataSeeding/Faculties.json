@@ -7,7 +7,7 @@
     "VideoUrl": "assets/videos/medicine.mp4",
     "DescriptionEn": "To be a pioneer in the fields of education, treatment and scientific research in Egypt and the Middle East.",
     "DescriptionAr": "أن تكون رائدة في مجالات التعليم والعلاج والبحث العلمي في مصر والشرق الأوسط.",
-    "DeanId": 11
+    "DeanId": "1"
   },
   {
     "SectorId": 1,
@@ -17,7 +17,7 @@
     "VideoUrl": "assets/videos/pharmacy.mp4",
     "DescriptionEn": "Prepare ethical, highly qualified pharmacists capable of advancing pharmaceutical care, industry, and research.",
     "DescriptionAr": "إعداد صيادلة أخلاقيين مؤهلين تأهيلاً عالياً قادرين على تطوير الرعاية الصيدلية والصناعة والبحث.",
-    "DeanId": 11
+    "DeanId": "6"
   },
   {
     "SectorId": 1,
@@ -27,7 +27,7 @@
     "VideoUrl": "assets/videos/dentistry.mp4",
     "DescriptionEn": "The Faculty aims to prepare qualified dental professionals who can compete and meet market needs.",
     "DescriptionAr": "تهدف الكلية إلى إعداد أطباء أسنان مؤهلين قادرين على المنافسة وتلبية احتياجات السوق.",
-    "DeanId": 11
+    "DeanId": "4"
   },
   {
     "SectorId": 1,
@@ -37,7 +37,7 @@
     "VideoUrl": "assets/videos/physical_therapy.mp4",
     "DescriptionEn": "Preparing competent graduates to meet local labor market needs and researchers who advance the profession.",
     "DescriptionAr": "إعداد خريجين مؤهلين لتلبية احتياجات سوق العمل المحلي وبناء باحثين ينهضون بالمهنة.",
-    "DeanId": 11
+    "DeanId": "16"
   },
   {
     "SectorId": 1,
@@ -47,7 +47,7 @@
     "VideoUrl": "assets/videos/nursing.mp4",
     "DescriptionEn": "The program aims to graduate a nursing specialist qualified with comprehensive nursing competencies.",
     "DescriptionAr": "يهدف البرنامج إلى تخريج أخصائي تمريض مؤهل يتمتع بالكفاءات اللازمة لتقديم رعاية شاملة.",
-    "DeanId": 11
+    "DeanId": "17"
   },
   {
     "SectorId": 2,
@@ -57,7 +57,7 @@
     "VideoUrl": "assets/videos/engineering.mp4",
     "DescriptionEn": "Preparing a distinguished graduate who will acquire the principles and skills of engineering.",
     "DescriptionAr": "إعداد خريجين متميزين يكتسبون مبادئ ومهارات الهندسة لخدمة المجتمع.",
-    "DeanId": 21
+    "DeanId": "12"
   },
   {
     "SectorId": 2,
@@ -67,7 +67,7 @@
     "VideoUrl": "assets/videos/computers-and-ai.mp4",
     "DescriptionEn": "Providing an outstanding and specialized model aimed at being among the best technical programs.",
     "DescriptionAr": "تقديم نموذج متميز ومتخصص يهدف لأن يكون من أفضل البرامج التقنية التي تلبي احتياجات سوق العمل.",
-    "DeanId": 21
+    "DeanId":"5"
   },
   {
     "SectorId": 2,
@@ -77,7 +77,7 @@
     "VideoUrl": "assets/videos/science.mp4",
     "DescriptionEn": "Fostering leadership and innovation in scientific research and advanced applied fields.",
     "DescriptionAr": "تعزيز الريادة والابتكار في البحث العلمي والمجالات التطبيقية المتقدمة لخدمة المجتمع.",
-    "DeanId": 21
+    "DeanId":"13"
   },
   {
     "SectorId": 3,
@@ -87,7 +87,7 @@
     "VideoUrl": "assets/videos/mass_comm.mp4",
     "DescriptionEn": "The sector encompasses the faculties of media and humanities, aiming to achieve educational and research excellence.",
     "DescriptionAr": "يحرص قطاع الآداب والفنون والعلوم الإنسانية على تقديم برامج أكاديمية متميزه تواكب العصر.",
-    "DeanId": 31
+    "DeanId": "7"
   },
   {
     "SectorId": 3,
@@ -97,7 +97,7 @@
     "VideoUrl": "assets/videos/commerce.mp4",
     "DescriptionEn": "Aligning undergraduate studies with local and regional labor market needs to prepare highly qualified graduates.",
     "DescriptionAr": "تلبية احتياجات سوق العمل التجاري المعاصر من خلال إعداد خريجين مؤهلين للمنافسة عالمياً.",
-    "DeanId": 31
+    "DeanId": "8"
   },
   {
     "SectorId": 3,
@@ -107,7 +107,7 @@
     "VideoUrl": "assets/videos/arts.mp4",
     "DescriptionEn": "To provide distinguished academic programs that prepare graduates to assume professional responsibility.",
     "DescriptionAr": "تقديم برامج أكاديمية متميزة تعد الخريجين لتحمل المسؤولية المهنية والبحثية.",
-    "DeanId": 31
+    "DeanId": "18"
   },
   {
     "SectorId": 3,
@@ -117,6 +117,6 @@
     "VideoUrl": "assets/videos/law.mp4",
     "DescriptionEn": "Providing the legal and academic labor market with qualified competencies to solve legal problems.",
     "DescriptionAr": "رفع كفاءة السوق القانوني والأكاديمي بكوادر مؤهلة لحل المشكلات القانونية وتقديم الاستشارات.",
-    "DeanId": 31
+    "DeanId": "10"
   }
 ]

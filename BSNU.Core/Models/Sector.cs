@@ -13,6 +13,8 @@ namespace BSNU.Core.Models
         public string SubTitleAr { get; set; } = null!;
         public string SubTitleEn { get; set; } = null!;
         public string Image { get; set; }
+        public string? DeanId { get; set; }
+        public StaffMember? Dean { get; set; }
         public ICollection<Faculty> Faculties { get; set; } = [];
     }
 }

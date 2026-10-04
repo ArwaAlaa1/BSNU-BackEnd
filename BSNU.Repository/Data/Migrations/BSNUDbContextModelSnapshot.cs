@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BSNU.Repository.Data.migrations
+namespace BSNU.Repository.Data.Migrations
 {
     [DbContext(typeof(BSNUDbContext))]
     partial class BSNUDbContextModelSnapshot : ModelSnapshot
@@ -102,10 +102,7 @@ namespace BSNU.Repository.Data.migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DeanId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DeanId1")
+                    b.Property<string>("DeanId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DescriptionAr")
@@ -143,7 +140,7 @@ namespace BSNU.Repository.Data.migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeanId1");
+                    b.HasIndex("DeanId");
 
                     b.HasIndex("SectorId");
 
@@ -418,10 +415,7 @@ namespace BSNU.Repository.Data.migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProgramManagerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProgramManagerId1")
+                    b.Property<string>("ProgramManagerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("StudentsCount")
@@ -446,7 +440,7 @@ namespace BSNU.Repository.Data.migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasIndex("ProgramManagerId1");
+                    b.HasIndex("ProgramManagerId");
 
                     b.ToTable("Programs");
                 });
@@ -461,6 +455,9 @@ namespace BSNU.Repository.Data.migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DeanId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
                         .IsRequired()
@@ -491,6 +488,8 @@ namespace BSNU.Repository.Data.migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DeanId");
 
                     b.ToTable("Sectors");
                 });
@@ -525,9 +524,6 @@ namespace BSNU.Repository.Data.migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
@@ -577,8 +573,6 @@ namespace BSNU.Repository.Data.migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -728,7 +722,7 @@ namespace BSNU.Repository.Data.migrations
                 {
                     b.HasOne("BSNU.Core.Models.StaffMember", "Dean")
                         .WithMany()
-                        .HasForeignKey("DeanId1");
+                        .HasForeignKey("DeanId");
 
                     b.HasOne("BSNU.Core.Models.Sector", "Sector")
                         .WithMany("Faculties")
@@ -823,18 +817,20 @@ namespace BSNU.Repository.Data.migrations
 
                     b.HasOne("BSNU.Core.Models.StaffMember", "ProgramManager")
                         .WithMany("ManagedPrograms")
-                        .HasForeignKey("ProgramManagerId1");
+                        .HasForeignKey("ProgramManagerId");
 
                     b.Navigation("Faculty");
 
                     b.Navigation("ProgramManager");
                 });
 
-            modelBuilder.Entity("BSNU.Core.Models.StaffMember", b =>
+            modelBuilder.Entity("BSNU.Core.Models.Sector", b =>
                 {
-                    b.HasOne("BSNU.Core.Models.Faculty", null)
-                        .WithMany("StaffMembers")
-                        .HasForeignKey("FacultyId");
+                    b.HasOne("BSNU.Core.Models.StaffMember", "Dean")
+                        .WithMany()
+                        .HasForeignKey("DeanId");
+
+                    b.Navigation("Dean");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -896,8 +892,6 @@ namespace BSNU.Repository.Data.migrations
             modelBuilder.Entity("BSNU.Core.Models.Faculty", b =>
                 {
                     b.Navigation("Programs");
-
-                    b.Navigation("StaffMembers");
                 });
 
             modelBuilder.Entity("BSNU.Core.Models.Programs", b =>
